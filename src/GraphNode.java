@@ -1,11 +1,19 @@
 import java.util.LinkedList;
 public class GraphNode {
 
-    LinkedList<GraphNode> OutDegree= new LinkedList<>();
-    LinkedList<GraphNode> InDegree= new LinkedList<>();
-    LinkedList<GraphNode> siblings= new LinkedList<>();
+    LinkedList<GraphNode> OutDegree;
+    LinkedList<GraphNode> InDegree;
+    int key;
 
-    int key=0;
+    public GraphNode(){
+        OutDegree= new LinkedList<>();
+        InDegree= new LinkedList<>();
+    }
+    public GraphNode(int key){
+        OutDegree= new LinkedList<>();
+        InDegree= new LinkedList<>();
+        this.key=key;
+    }
 
     public int getOutDegree()
     {
@@ -17,23 +25,25 @@ public class GraphNode {
         return this.InDegree.size();
     }
 
-    public int getInDegree()
+    public void addInDegree(GraphNode node)
     {
-        return this.siblings.size();
+        this.InDegree.add(node);
     }
 
-    public boolean addSibling(GraphNode node){
-        for(int i=0; i<node.InDegree.size(); i++)
-        {
-            if(this.InDegree.contains(node.InDegree.get(i))){
-                this.siblings.addLast(node.InDegree.get(i));
-                return true;
-            }
-        }
-        return false;
+    public void addOutDegree(GraphNode node)
+    {
+        this.OutDegree.add(node);
     }
 
+    public void removeFromInDegree(GraphNode node)
+    {
+        this.InDegree.remove(node);
+    }
 
+    public void removeFromOutDegree(GraphNode node)
+    {
+        this.OutDegree.remove(node);
+    }
     public int getKey(){ return this.key;}
 
 }
