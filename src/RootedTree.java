@@ -1,62 +1,56 @@
 import java.io.DataOutputStream;
 
-public class RootedTree{
-        RootedTreeNode root;
+public class RootedTree {
+    RootedTreeNode root;
 
-        public RootedTree(){
-                root= new RootedTreeNode();
+    public RootedTree() {
+        root = new RootedTreeNode(0);
+    }
+
+
+
+
+    public void printByLayer(DataOutputStream out) {
+
+
+
+    }
+
+
+    public void preorderPrint(DataOutputStream out) {
+        int parent_sibling=0;
+        int child=1;
+        int from=parent_sibling;
+        RootedTreeNode x= this.root;
+        while(x!=null){
+            if(from==parent_sibling){
+                out.writeInt(x.getKey());
+                if(x.left_child!=null)x=x.left_child;
+                else
+                {
+                    if(x.right_sibling!=null)x=x.right_sibling;
+                    else{
+                        from=child;
+                        x=x.parent;
+                    }
+                }
+            }
+            else {
+                if(x.right_sibling!=null)
+                {
+                    from=parent_sibling;
+                    x=x.right_sibling;
+                }
+                else x=x.parent;
+            }
         }
 
-        public void printByLayer(DataOutputStream out){
-                out.writeInt(root.getKey());
-                while (root.getLeft_child()!=null)
-                {
-                        RootedTreeNode sibling= root.getLeft_child();
-                        out.writeInt(sibling.getKey());
-                        while(sibling.getRight_sibling()!=null){
-                                sibling= root.getRight_sibling();
-                                out.writeInt(sibling.getKey());
-                        }
-                }
-
-        public void preorderPrint(DataOutputStream out)
-                {
-                     RootedTreeNode from=null;
-                     RootedTreeNode x= this.root;
-                     while (x!= null){
-                             if(from== x.getParent() || (from==x.getLeftSibling() && from!=null))
-                             {
-                                     out.writeInt(x.getKey());
-                                     if(x.getLeft_child()!=null) x=x.getLeft_child();
-                                     else
-                                     {
-                                        if(x.getRight_sibling()!=null) x=x.getRight_sibling();
-                                        else
-                                        {
-                                            from=x.getLeft_child();
-                                            x=x.getParent();
-                                        }
-                                     }
-                             }
-                             else
-                             {
-                                     if(x.getRight_sibling()!=null)
-                                     {
-                                             from=/*      */
-                                             x=x.getRight_sibling();
-                                     }
-                                     else
-                                     {
-                                             x=x.getParent();
-                                     }
-                             }
-                     }
-                }
-
-
-
-
-
-
+    }
 
 }
+
+
+
+
+
+
